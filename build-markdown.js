@@ -1,12 +1,17 @@
-var async = require('async')
-  , ejs = require('ejs')
-  , fs = require('fs')
-  , marked = require('marked');
+const async = require('async'),
+    ejs = require('ejs'),
+    fs = require('fs'),
+    path = require('path'),
+    marked = require('marked');
 
+const config = {
+    src: path.join(__dirname, 'src'),
+    dist: path.join(__dirname, 'docs')
+};
 
-var readFile = function (fileName) {
+const readFile = function (fileName) {
   return function (callback) {
-    fs.readFile(__dirname + '/src/' + fileName, 'utf-8', callback);
+    fs.readFile(path.join(config.src, fileName), 'utf-8', callback);
   };
 };
 
@@ -14,6 +19,7 @@ async.parallel({
   template: readFile('index.ejs'),
   text: readFile('text.md')
 },
+
 function (err, files) {
   if (err) throw err;
 
@@ -34,7 +40,7 @@ function (err, files) {
     if (err) throw err;
 
     var builtText = ejs.render(files.template, {text: content});
-    fs.writeFile(__dirname + '/index.html', builtText, function (err) {
+    fs.writeFile(path.join(config.dist, 'index.html'), builtText, function (err) {
       if (err) throw err;
 
       console.log("Finished.");
