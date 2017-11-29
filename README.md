@@ -5,7 +5,7 @@ PHP: 잘못된 디자인의 프랙탈
 ----
 본문은 아래 페이지에서 읽으실 수 있습니다.  
 
-* http://tienne89.github.io/php-a-fractal-of-bad-design
+* https://tienne.github.io/php-a-fractal-of-bad-design/
 
 읽기 전에...
 ------------
